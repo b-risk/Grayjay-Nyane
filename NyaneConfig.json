@@ -1,0 +1,26 @@
+{
+  "name": "Nyane",
+  "platformUrl": "https://nyane.online",
+  "description": "Watch preserved video archives hosted on Nyane.",
+  "author": "Freeb",
+  "authorUrl": "https://github.com/b-risk",
+  "sourceUrl": "https://raw.githubusercontent.com/b-risk/Grayjay-Nyane/refs/heads/main/NyaneConfig.json",
+  "scriptUrl": "./NyaneScript.js",
+  "repositoryUrl": "https://github.com/b-risk/Grayjay-Nyane",
+  "version": 1,
+  "iconUrl": "./Imgs/NyaneIcon.png",
+  "id": "a7f3d9e1-5c62-4b81-9a0d-f8e7c6b5a432",
+  "scriptSignature": "",
+  "scriptPublicKey": "",
+  "packages": [
+    "Http",
+    "Utilities",
+    "DOMParser"
+  ],
+  "allowEval": false,
+  "allowAllHttpHeaderAccess": false,
+  "allowUrls": [
+    ".nyane.online",
+    ".cdn.nyane.online"
+  ]
+}
