@@ -10,8 +10,8 @@
   "version": 1,
   "iconUrl": "./Imgs/NyaneIcon.png",
   "id": "a7f3d9e1-5c62-4b81-9a0d-f8e7c6b5a432",
-  "scriptSignature": "",
-  "scriptPublicKey": "",
+  "scriptSignature": "GiKGCPdb0CMievDt3AebHsTdrA5zqvfesmLPkYvASHH4YHFBl/WH7ycDukzq0PXwUrNPx1Dv5QeyaLQVBTJ0nuC36weK55mGT4t2ZQOvm3gVoUklGSUo0yyvvQcQrk7H0JlMo5lQW/NI9iZ31tSJVf5o/4+9rIkM4dwFYrvwgo9wfLpigL8scdSBcV2RUZViKHgOQGVzSFi7sVCh4bYFH7F/OK26ulgCq3YCBZfqBO0T3DpdkDDRShH5ObSuPjoW3B8jq1z4lCVard+M/FG6KRNMum9LZNUCKZtB66jmCyft2XynjHMQBcnYF4ivIHS2wT/Hu3NNUjICCs8ArQYuTw==",
+  "scriptPublicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsooIdvkTkDL4+qOFA57vvV63w4lOTBkdJn/sQ0ehLI8LI/6L4da9uDWSxaa3t3uf5uF7m2Wo6qoBh5YCcR9i2+I6dI8fQfVWBCqc2VOgSdPH9AQrONetrGKCAQVEfyc28f8c6KpOV/1fYhrs8UYC8DlIgFt9H+th1k9tbg5GKkWod5lXlzOqIP1d2dhz4J9dLNmZaAX5iMWwMT2+G++/z9xl9MW2Payb7HcIe1NYRrlX90YLjIF2F6TAeOxnYTjoh7uc8UrVQbJNTMm5thScByaNmCk9rSrHGr+IKFYk29rjoT/rVtEKD4CSq4r94KxdwlfepP1zm8nX9zHyevfgjQIDAQAB",
   "packages": [
     "Http",
     "Utilities",

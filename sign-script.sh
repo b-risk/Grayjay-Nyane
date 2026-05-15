@@ -1,42 +1,29 @@
-#!/bin/bash
-# Generate keypair
-# ssh-keygen -t rsa -b 2048 -m PEM -f ./private-key.pem
-#
-# Encode it in Base64 and set the environment variable
-# export SIGNING_PRIVATE_KEY="$(base64 -w 0 ./private-key.pem)"
-#
-# Run the sign script:
-# sh ./sign-script.sh "{SCRIPT_FILE_PATH}" "{CONFIG_FILE_PATH}"
+#!/bin/sh
 
-if [ -z "$SIGNING_PRIVATE_KEY" ]; then
-    echo "Error: SIGNING_PRIVATE_KEY environment variable not set"
-    echo ""
-    echo "Generate a keypair first:"
-    echo "  ssh-keygen -t rsa -b 2048 -m PEM -f ./private-key.pem"
-    echo "  export SIGNING_PRIVATE_KEY=\"\$(base64 -w 0 ./private-key.pem)\""
-    exit 1
+# Parameters
+JS_FILE_PATH=$1
+CONFIG_FILE_PATH=$2
+
+# Decode and save the private key to a temporary file
+echo "$SIGNING_PRIVATE_KEY" | base64 -d > tmp_private_key.pem
+
+# Validate private key
+if ! openssl rsa -check -noout -in tmp_private_key.pem > /dev/null 2>&1; then
+  echo "Invalid private key."
+  rm tmp_private_key.pem
+  exit 1
 fi
 
-SCRIPT_FILE="$1"
-CONFIG_FILE="$2"
+# Generate signature for the provided JS file
+SIGNATURE=$(cat $JS_FILE_PATH | openssl dgst -sha512 -sign tmp_private_key.pem | base64 -w 0)
 
-if [ -z "$SCRIPT_FILE" ] || [ -z "$CONFIG_FILE" ]; then
-    echo "Usage: $0 <script-file> <config-file>"
-    exit 1
-fi
+# Extract public key from the temporary private key file
+PUBLIC_KEY=$(openssl rsa -pubout -outform DER -in tmp_private_key.pem 2>/dev/null | openssl pkey -pubin -inform DER -outform PEM | tail -n +2 | head -n -1 | tr -d '\n')
 
-# Create signature
-SIGNATURE=$(echo -n "$(cat "$SCRIPT_FILE")" | openssl dgst -sha256 -sign <(echo "$SIGNING_PRIVATE_KEY" | base64 -d) | base64 -w 0)
-PUBLIC_KEY=$(echo "$SIGNING_PRIVATE_KEY" | base64 -d | openssl rsa -pubout 2>/dev/null | base64 -w 0)
+echo "PUBLIC_KEY: $PUBLIC_KEY"
 
-# Update config with signature
-TMP_FILE=$(mktemp)
-node -e "
-const config = require('fs').readFileSync('$CONFIG_FILE', 'utf8');
-const json = JSON.parse(config);
-json.scriptSignature = '$SIGNATURE';
-json.scriptPublicKey = '$PUBLIC_KEY';
-require('fs').writeFileSync('$CONFIG_FILE', JSON.stringify(json, null, 2) + '\n');
-"
+# Remove temporary key files
+rm tmp_private_key.pem
 
-echo "Script signed successfully!"
+# Update "scriptSignature" and "scriptPublicKey" fields in Config JSON
+cat $CONFIG_FILE_PATH | jq --arg signature "$SIGNATURE" --arg publicKey "$PUBLIC_KEY" '. + {scriptSignature: $signature, scriptPublicKey: $publicKey}' > temp_config.json && mv temp_config.json $CONFIG_FILE_PATH
