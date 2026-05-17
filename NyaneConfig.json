@@ -7,7 +7,7 @@
   "sourceUrl": "https://raw.githubusercontent.com/b-risk/Grayjay-Nyane/refs/heads/main/NyaneConfig.json",
   "scriptUrl": "./NyaneScript.js",
   "repositoryUrl": "https://github.com/b-risk/Grayjay-Nyane",
-  "version": 1,
+  "version": 2,
   "iconUrl": "./Imgs/NyaneIcon.png",
   "id": "a7f3d9e1-5c62-4b81-9a0d-f8e7c6b5a432",
   "scriptSignature": "GiKGCPdb0CMievDt3AebHsTdrA5zqvfesmLPkYvASHH4YHFBl/WH7ycDukzq0PXwUrNPx1Dv5QeyaLQVBTJ0nuC36weK55mGT4t2ZQOvm3gVoUklGSUo0yyvvQcQrk7H0JlMo5lQW/NI9iZ31tSJVf5o/4+9rIkM4dwFYrvwgo9wfLpigL8scdSBcV2RUZViKHgOQGVzSFi7sVCh4bYFH7F/OK26ulgCq3YCBZfqBO0T3DpdkDDRShH5ObSuPjoW3B8jq1z4lCVard+M/FG6KRNMum9LZNUCKZtB66jmCyft2XynjHMQBcnYF4ivIHS2wT/Hu3NNUjICCs8ArQYuTw==",
@@ -22,5 +22,8 @@
   "allowUrls": [
     ".nyane.online",
     ".cdn.nyane.online"
-  ]
+  ],
+  "changelog": {
+    "2": ["Removed YouTube URL detection"]
+  }
 }

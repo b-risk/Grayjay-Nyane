@@ -25,7 +25,6 @@ const regex = {
     videoUrl: /^https:\/\/(?:www\.)?nyane\.online\/video\?id=[^&]+$/,
     channelUrl: /^https:\/\/(?:www\.)?nyane\.online\/channel\?id=[^&]+$/,
     videoIdFromUrl: /\/video\?id=([^&]+)/,
-    youtubeVideoId: /(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/,
     channelIdFromUrl: /\/channel\?id=([^&]+)/,
     nextPageLink: /<a class='next-page' href='([^']+)'>Next<\/a>/,
     videoPageTitle: /<div class='video-title'>([^<]+)<\/div>/,
@@ -133,27 +132,11 @@ source.getChannelContents = function (url, type, order, filters, continuationTok
 
 // Detect video URL
 source.isContentDetailsUrl = function (url) {
-    // Detect Nyane video URL
-    if (regex.videoUrl.test(url))
-        return true;
-
-    // Detect YouTube video URL and check if it exists on Nyane
-    const ytMatch = url.match(regex.youtubeVideoId);
-    if (ytMatch) {
-        const resp = http.GET(platform.url + 'video?id=' + ytMatch[1], {}, false);
-        return resp.isOk;
-    }
-
-    return false;
+    return regex.videoUrl.test(url);
 }
 
 // Get video details
 source.getContentDetails = function (url) {
-    // Normalize YouTube URLs to Nyane URLs
-    const ytMatch = url.match(regex.youtubeVideoId);
-    if (ytMatch)
-        url = platform.url + 'video?id=' + ytMatch[1];
-
     const videoId = extractDetail(url, regex.videoIdFromUrl);
     const resp = http.GET(url, {}, false);
 
