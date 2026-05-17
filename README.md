@@ -20,8 +20,6 @@ grayjay://plugin/https://raw.githubusercontent.com/b-risk/Grayjay-Nyane/refs/hea
 - [x] Homepage results (first channel's videos)
 - [x] Video searches across all channels
 - [x] Channel searches
-- [x] Pagination on channel pages
-- [x] YouTube URL support (normalizes youtube.com links to nyane equivalents)
 
 ## Signing
 
